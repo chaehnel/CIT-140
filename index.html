@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head> <meta charset="UTF-8">	<title>Program 5 CIT 140</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+
+</script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"> 
+</script>
+</head>
+
+<body>
+	<p>Select A Major</p>
+
+<script type="text/x-handlebars-template" id="tableTemplate">
+	<table cellspacing='12'>
+		<tr><th>Name</th><th>Major</th><th>Midterm</th><th>Final</th></tr>
+			{{#each rows}}
+				<tr>
+					<td>{{Name}}</td><td>{{Major}}</td><td>{{Midterm}}</td><td>{{Final}}</td>
+				</tr>
+			{{/each}}
+	</table>
+</script>
+
+<script>
+	async function getData(selected_major){
+		var response = await fetch('cit5students.json');
+	
+	if(reponse.cit){
+		var data = await response.json();
+		
+		var templateText = document.getElementById('tableTemplate').innerHTML;
+		var compiledTemplateText = Handlebars.compile(templateText);
+		compiledHtml = compiledTemplateText({rows:data})
+		document.getElementById('citTable').innerHTML = compiledHtml;
+	}
+	else(response.bus)
+		var data = await response.json();
+		var templateText = document.getElementById('tableTemplate').innerHTML;
+		var compiledTemplateText = Handlebars.compile(templateText);
+		compiledHtml = compiledTemplateText({rows:data})
+		document.getElementById('busTable').innerHTML = compiledHtml;
+}
+
+</script>
+
+<body>
+
+	<input type="button" id='cit' value="CIT Majors">  <input type="button" id='bus' value="Business Majors">
+	
+	<p>We filter our dataset by major</p>
+
+</body>
+</html>
+	
